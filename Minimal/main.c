@@ -2,11 +2,6 @@
  * Main program.
  */
 
-void SystemInit(void)
-{
-
-}
-
 int main(void) 
 {
   int val = 0;
