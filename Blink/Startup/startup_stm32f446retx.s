@@ -546,7 +546,7 @@ g_pfnVectors:
    .thumb_set FMPI2C1_EV_IRQHandler,Default_Handler
    
    .weak      FMPI2C1_ER_IRQHandler            
-   .thumb_set FMPI2C1_ER_IRQHandler,Default_Handler 
+   .thumb_set FMPI2C1_ER_IRQHandler,Default_Handler
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/        
  

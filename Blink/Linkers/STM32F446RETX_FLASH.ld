@@ -22,7 +22,7 @@
 *****************************************************************************
 ** @attention
 **
-** <h2><center>&copy; COPYRIGHT(c) 2019 STMicroelectronics</center></h2>
+** <h2><center>&copy; COPYRIGHT(c) 2020 STMicroelectronics</center></h2>
 **
 ** Redistribution and use in source and binary forms, with or without modification,
 ** are permitted provided that the following conditions are met:
@@ -61,7 +61,7 @@ _Min_Stack_Size = 0x400 ;	/* required amount of stack */
 /* Memories definition */
 MEMORY
 {
-    FLASH	(rx)	: ORIGIN = 0x08008000,	LENGTH = 480K
+    FLASH	(rx)	: ORIGIN = 0x8000000,	LENGTH = 512K
     RAM	(rwx)	: ORIGIN = 0x20000000,	LENGTH = 128K
 }
 

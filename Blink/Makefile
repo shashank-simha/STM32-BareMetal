@@ -46,6 +46,9 @@ AS_SRC   =  Startup/startup_stm32f446retx.s
 #AS_SRC   += ./vector_table.S
 C_SRC    =  Src/main.c
 
+INCLUDE = -I./
+INCLUDE += -I./Inc
+
 OBJS  = $(AS_SRC:.s=.o)
 OBJS += $(C_SRC:.c=.o)
 
