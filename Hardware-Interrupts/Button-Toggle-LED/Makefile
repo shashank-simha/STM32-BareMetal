@@ -45,6 +45,7 @@ LFLAGS += -T$(LSCRIPT)
 AS_SRC   =  Startup/startup_stm32f446retx.s
 #AS_SRC   += ./vector_table.S
 C_SRC    =  Src/main.c
+C_SRC	+=	Src/NVIC.c
 
 INCLUDE = -I./
 INCLUDE += -I./Inc
