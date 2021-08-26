@@ -7,13 +7,16 @@
 #define STACK_START			SRAM_END
 
 extern uint32_t _etext;
+extern uint32_t _la_data;
 extern uint32_t _sdata;
 extern uint32_t _edata;
+
 extern uint32_t _sbss;
 extern uint32_t _ebss;
 
 // prototype of main
 int main(void);
+void __libc_init_array(void);
 
 void Reset_Handler(void);
 void NMI_Handler 					(void) __attribute__ ((weak, alias("Default_Handler")));
@@ -220,7 +223,7 @@ void Reset_Handler(void)
 	uint32_t size = (uint32_t)&_edata - (uint32_t)&_sdata; // _edata and _sdata are symbols given to address, they don't have any values
 
 	uint8_t *pDst = (uint8_t *)&_sdata; // RAM
-	uint8_t *pSrc = (uint8_t *)&_etext; // Flash
+	uint8_t *pSrc = (uint8_t *)&_la_data; // Flash
 
 	for(uint32_t i = 0; i < size; i++)
 	{
@@ -237,7 +240,7 @@ void Reset_Handler(void)
 	}
 
 	// call init function of standard library
-	/* no standard library used in this project */
+	__libc_init_array();
 
 	// call main()
 	main();
