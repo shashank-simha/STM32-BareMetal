@@ -59,11 +59,12 @@
 
 *__Note:__* C start-up: copy data section from ROM to RAM and reserve some space for .bss section with the help of startup file, and call main function
 
-## Startup file
+# Startup file
 #### Function Attributes
 Weak: Lets the programmer to override already defined weak functionality(dummy) with the same function name
 Alias: Lets the programmer to give alias name for a function
 
+# Linker Script
 #### Linker and Locator
 Linker: merge similar sections of different object files and resolve undefined symbols of different object files.
 Locator(part of linker): how to merge different sections and assigns mentioned addresses to different sections
@@ -95,7 +96,7 @@ Locator(part of linker): how to merge different sections and assigns mentioned a
     - appears only inside SECTIONS command
     - always tracks VMA(Virtual Memory Address) not LMA(Load Memory Address)
 
-### Semi Hosting
+# Semi Hosting
 - Useful to print messages on openocd terminal
 - Depends on some host such as openocd
 - Use rdimon specs instead of glib nano
