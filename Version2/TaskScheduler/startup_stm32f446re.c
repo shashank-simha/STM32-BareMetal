@@ -217,7 +217,7 @@ void Default_Handler(void)
 void Reset_Handler(void)
 {
 	// copy .data section from Flash to SRAM
-	uint32_t size = &_edata - &_sdata; // _edata and _sdata are symbols given to address, they don't have any values
+	uint32_t size = (uint32_t)&_edata - (uint32_t)&_sdata; // _edata and _sdata are symbols given to address, they don't have any values
 
 	uint8_t *pDst = (uint8_t *)&_sdata; // RAM
 	uint8_t *pSrc = (uint8_t *)&_etext; // Flash
@@ -228,7 +228,7 @@ void Reset_Handler(void)
 	}
 
 	// Initialize the .bss section in SRAM to zero
-	size = &_ebss - &_sbss;
+	size = (uint32_t)&_ebss - (uint32_t)&_sbss;
 	pDst = (uint8_t *)&_sbss;
 
 	for(uint32_t i = 0; i < size; i++)
