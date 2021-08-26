@@ -6,6 +6,14 @@
 
 #define STACK_START			SRAM_END
 
+extern uint32_t _etext;
+extern uint32_t _sdata;
+extern uint32_t _edata;
+extern uint32_t _sbss;
+extern uint32_t _ebss;
+
+// prototype of main
+int main(void);
 
 void Reset_Handler(void);
 void NMI_Handler 					(void) __attribute__ ((weak, alias("Default_Handler")));
@@ -209,12 +217,28 @@ void Default_Handler(void)
 void Reset_Handler(void)
 {
 	// copy .data section from Flash to SRAM
+	uint32_t size = &_edata - &_sdata; // _edata and _sdata are symbols given to address, they don't have any values
 
+	uint8_t *pDst = (uint8_t *)&_sdata; // RAM
+	uint8_t *pSrc = (uint8_t *)&_etext; // Flash
+
+	for(uint32_t i = 0; i < size; i++)
+	{
+		*pDst++ = *pSrc++;
+	}
 
 	// Initialize the .bss section in SRAM to zero
+	size = &_ebss - &_sbss;
+	pDst = (uint8_t *)&_sbss;
+
+	for(uint32_t i = 0; i < size; i++)
+	{
+		*pDst++ = 0;
+	}
 
 	// call init function of standard library
 	/* no standard library used in this project */
 
 	// call main()
+	main();
 }
