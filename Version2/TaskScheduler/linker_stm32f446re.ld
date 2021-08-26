@@ -58,5 +58,7 @@ SECTIONS
     __bss_end__ = _ebss;
     . = ALIGN(4);
     _end = .;
+    end = _end;
+    __end__ = _end;
   }> RAM
 }

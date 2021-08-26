@@ -57,6 +57,9 @@ void update_global_tick_count(void);
 void schedule(void);
 
 
+/* Semi hosting related prototype */
+void initialise_monitor_handles(void);
+
 uint8_t current_task = 1; // task1 is running
 
 uint32_t global_tick_count = 0;
@@ -75,6 +78,10 @@ TCB_t user_tasks[MAX_TASKS];
 int main(void)
 {
 	enable_processor_faults();
+
+    /* enable semi hosting handles */
+    initialise_monitor_handles();
+    printf("Initialized semi hosting handles\n");
 
 	init_scheduler_stack(SCHED_STACK_START);
 
@@ -101,7 +108,7 @@ void task1_handler(void)
 {
 	while(1)
 	{
-		//printf("This is Task1\n");
+		printf("This is Task1\n");
 		led_on(LED_RED);
 		task_delay(1000); // in this program, tick is updated for every 1ms
 		led_off(LED_RED);
@@ -113,7 +120,7 @@ void task2_handler(void)
 {
 	while(1)
 	{
-		//printf("This is Task2\n");
+		printf("This is Task2\n");
 		led_on(LED_GREEN);
 		task_delay(500); // in this program, tick is updated for every 1ms
 		led_off(LED_GREEN);
@@ -125,7 +132,7 @@ void task3_handler(void)
 {
 	while(1)
 	{
-		//printf("This is Task3\n");
+		printf("This is Task3\n");
 		led_on(LED_BLUE);
 		task_delay(250); // in this program, tick is updated for every 1ms
 		led_off(LED_BLUE);
@@ -137,7 +144,7 @@ void task4_handler(void)
 {
 	while(1)
 	{
-		//printf("This is Task4\n");
+		printf("This is Task4\n");
 		led_on(LED_WHITE);
 		task_delay(125); // in this program, tick is updated for every 1ms
 		led_off(LED_WHITE);
