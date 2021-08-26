@@ -4,7 +4,7 @@ MACH=cortex-m4
 LD_SRC= linker_stm32f446re.ld
 
 CFLAGS= -c -mcpu=$(MACH) -mthumb -std=gnu11 -Wall
-LDFLAGS= -nostdlib -T $(LD_SRC)
+LDFLAGS= -nostdlib -T $(LD_SRC) -Wl,-Map=main.map
 
 all: main.elf
 
@@ -21,4 +21,4 @@ main.elf: main.o led.o startup_stm32f446re.o
 	$(CC) $(LDFLAGS) -o $@ $^
 
 clean:
-	rm -rf *.o *.elf
+	rm -rf *.o *.elf *.map
