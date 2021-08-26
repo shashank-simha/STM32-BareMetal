@@ -357,18 +357,18 @@ void SysTick_Handler(void)
 /* Fault Handlers */
 void HardFault_Handler(void)
 {
-	printf("Exception: Hardfault\n");
+//	printf("Exception: Hardfault\n");
 	while(1);
 }
 
 void MemManage_Handler(void)
 {
-	printf("Exception: MemManage\n");
+//	printf("Exception: MemManage\n");
 	while(1);
 }
 
 void BusFault_Handler(void)
 {
-	printf("Exception: BusFault\n");
+//	printf("Exception: BusFault\n");
 	while(1);
 }

@@ -208,5 +208,13 @@ void Default_Handler(void)
 
 void Reset_Handler(void)
 {
+	// copy .data section from Flash to SRAM
 
+
+	// Initialize the .bss section in SRAM to zero
+
+	// call init function of standard library
+	/* no standard library used in this project */
+
+	// call main()
 }
