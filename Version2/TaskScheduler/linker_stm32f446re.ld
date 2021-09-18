@@ -16,8 +16,8 @@ SECTIONS
 {
   .text :
   {
-  	. = ALIGN(4);
-  	
+    . = ALIGN(4);
+
     *(.isr_vector)
     *(.text)
     *(.text*)
@@ -32,29 +32,29 @@ SECTIONS
 
   .data :
   {
-  	. = ALIGN(4);
-  	
-  	_sdata = .; /* Start of data on VMA i.e; SRAM */
-  	*(.data)
+    . = ALIGN(4);
+
+    _sdata = .; /* Start of data on VMA i.e; SRAM */
+    *(.data)
     *(.data*)
-  	
-  	. = ALIGN(4);
-  	_edata = .;
+
+    . = ALIGN(4);
+    _edata = .;
   }> RAM AT> FLASH
   
   .bss :
   {
-  	. = ALIGN(4);
-  	
+    . = ALIGN(4);
+
     _sbss = .;
     __bss_start__ = _sbss;
 
     *(.bss)
     *(.bss*)
     *(COMMON)
-  	
-  	. = ALIGN(4);
-  	_ebss = .;
+
+    . = ALIGN(4);
+    _ebss = .;
     __bss_end__ = _ebss;
     . = ALIGN(4);
     _end = .;
