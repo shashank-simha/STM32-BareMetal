@@ -45,7 +45,7 @@
 | __user defined sections__ | contains data/code programmer demands to put in these sections | RAM/ROM |
 | __special sections__ | contains special data added by compiler | RAM |
 
-*__Note:__* RAM => Flash
+*__Note:__* R0M => Flash
 
 ## Recommended order of sections
 | Code Memory(Flash) | Data Memory (SRAM) |
@@ -59,12 +59,25 @@
 
 *__Note:__* C start-up: copy data section from ROM to RAM and reserve some space for .bss section with the help of startup file, and call main function
 
-# Startup file
+## Variable types/Data to section mapping
+| Data | Load Time(LMA) | Run Time(VMA) | Section | Note |
+| -- | ----- | ---- | ----- | ------ |
+| Global Initialized | FLASH | RAM |.data | should be copied from flash to RAM by startup code |
+| Global Uninitialized | --- | RAM | .bss | startup code reserves space for this data in RAM and initializes to zero |
+| Global Static Initialized | FLASH | RAM | .data | should be copied from flash to RAM by startup code |
+| Global Static Uninitialized | --- | RAM | .bss | startup code reserves space for this data in RAM and initializes to zero |
+| Local Initialized | --- | STACK(RAM) | --- | Will be created and destroyed in function scope at runtime |
+| Local Uninitialized | --- | STACK(RAM) | --- | Will be created and destroyed in function scope at runtime |
+| Local Static Initialized | FLASH | RAM | .data | should be copied from flash to RAM by startup code(Treated as global variable) |
+| Local Static Uninitialized | --- | RAM | .bss | startup code reserves space for this data in RAM and initializes to zero(Treated as global variable) |
+| All Global Const | FLASH | --- | .rodata |  |
+| All Local Const | --- | STACK(RAM) | --- | .rodata | Treated as locals |
+
+## Startup file
 #### Function Attributes
 Weak: Lets the programmer to override already defined weak functionality(dummy) with the same function name
 Alias: Lets the programmer to give alias name for a function
 
-# Linker Script
 #### Linker and Locator
 Linker: merge similar sections of different object files and resolve undefined symbols of different object files.
 Locator(part of linker): how to merge different sections and assigns mentioned addresses to different sections
@@ -96,7 +109,7 @@ Locator(part of linker): how to merge different sections and assigns mentioned a
     - appears only inside SECTIONS command
     - always tracks VMA(Virtual Memory Address) not LMA(Load Memory Address)
 
-# Semi Hosting
+### Semi Hosting
 - Useful to print messages on openocd terminal
 - Depends on some host such as openocd
 - Use rdimon specs instead of glib nano
